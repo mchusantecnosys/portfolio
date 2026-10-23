@@ -1,28 +1,33 @@
 {
-  "name": "brittanychiang.com",
+  "name": "mariochusan.com",
   "version": "0.0.0",
-  "description": "Design-minded front-end software engineer focused on building beautiful interfaces and experiences",
+  "description": "AI / Software engineer focused on building beautiful interfaces and experiences",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bchiang7/bchiang7.github.io"
+    "url": ""
   },
-  "homepage": "https://github.com/bchiang7/bchiang7.github.io",
+  "homepage": "https://mchusantecnosys.github.io",
   "main": "gulpfile.js",
   "scripts": {
-    "start": "gulp serve --watch",
+    "start": "gulp serve",
+    "serve": "browser-sync start --server _site --files _site",
     "build": "gulp build"
   },
-  "author": "Brittany Chiang",
+  "author": "Mario Chusán",
   "license": "ISC",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "devDependencies": {
-    "@nuscout/eslint-config": "^0.2.1",
-    "browser-sync": "^2.26.7",
-    "gulp": "^4.0.0",
-    "gulp-autoprefixer": "^7.0.0",
+    "browser-sync": "^3.0.3",
+    "gulp": "^5.0.0",
+    "gulp-autoprefixer": "^9.0.0",
     "gulp-clean-css": "^4.3.0",
-    "gulp-eslint": "^6.0.0",
-    "gulp-imagemin": "6.0.0",
-    "gulp-sass": "^4.1.0",
-    "gulp-uglify": "3.0.2"
+    "gulp-eslint-new": "^2.4.0",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-uglify": "^3.0.2",
+    "playwright": "^1.64.0",
+    "sass": "^1.79.4"
   }
 }

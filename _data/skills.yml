@@ -1,33 +1,26 @@
-languages:
-  - item: JavaScript (ES6)
-  - item: TypeScript
-  - item: HTML
-  - item: CSS/Sass
+frontend:
+  - item: JavaScript
+  - item: React.js
+  - item: Next.js
+  - item: Vite
+
+backend:
   - item: Python
-  - item: SQL
-  - item: R
+  - item: FastAPI
 
-frameworks:
-  - item: Ember & Glimmer
-  - item: React
-  - item: Jekyll
-  - item: Node
-  - item: D3
-  - item: Wordpress
-  - item: Timber
-
-tools:
-  - item: Bash
-  - item: Git & Github
-  - item: Gulp & Grunt
-  - item: Chrome DevTools
-  - item: Postman
-  - item: MongoDB
-
-design:
-  - item: Sketch
-  - item: InDesign
-  - item: InVision
-  - item: Prototyping
-  - item: Wireframing
-  - item: User Testing
+ai:
+  - item: MCP (Model Context Protocol)
+  - item: LangGraph
+  - item: Prompt Engineering
+  - item: AI App Development & Deployment
+  - item: AI Agents
+  - item: TensorFlow, Keras, and Scikit-learn
+others:
+  - item: Git
+  - item: SAP Business One
+  - item: Excel, Power BI
+  - item: Statistical and data analysis
+  - item: Computer networking
+  - item: English (B2)
+  - item: Multicultural communication, cross-functional teamwork, time management
+  - item: Critical thinking, active learning methodologies, educational robotics

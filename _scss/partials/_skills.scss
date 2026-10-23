@@ -1,24 +1,33 @@
 .skills {
   .skillz {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 50px;
+
     @include weird-medium {
-      flex-wrap: wrap;
+      gap: 30px 25px;
     }
+
+    @include mobile {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
     &__category {
-      @include weird-medium {
-        width: 47%;
-        margin-right: 5px;
-        margin-bottom: 25px;
-      }
+      min-width: 0;
+
       &__label {
         font-weight: 700;
         color: $black;
         text-transform: uppercase;
+        margin-bottom: 10px;
+        letter-spacing: 0.5px;
       }
+
       &__item {
-        margin: 3px 0;
+        margin: 5px 0;
         font-size: 0.9rem;
+        line-height: 1.5;
       }
     }
   }

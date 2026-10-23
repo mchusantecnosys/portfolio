@@ -1,8 +1,6 @@
 const browserSync = require('browser-sync').create();
 const cp = require('child_process');
 
-const jekyll = process.platform === 'win32' ? 'jekyll.bat' : 'jekyll';
-
 const scssPath = '_scss/**/*.scss';
 const jsPath = '_scripts/*.js';
 const templatePath = [
@@ -13,23 +11,46 @@ const templatePath = [
   '_posts/*',
 ];
 
+function runJekyll(args, done) {
+  const proc = cp.spawn('bundle', ['exec', 'jekyll', ...args], {
+    stdio: 'inherit',
+    shell: true,
+  });
+
+  proc.on('error', () => {
+    const fallback = cp.spawn('jekyll', args, { stdio: 'inherit', shell: true });
+    fallback.on('error', () => done());
+    fallback.on('close', () => done());
+  });
+
+  proc.on('close', code => {
+    if (code === 0) {
+      done();
+    } else {
+      const fallback = cp.spawn('jekyll', args, {
+        stdio: 'inherit',
+        shell: true,
+      });
+      fallback.on('error', () => done());
+      fallback.on('close', () => done());
+    }
+  });
+}
+
 module.exports = gulp => {
   const reloadBrowser = done => {
     browserSync.reload();
     done();
   };
+
   // run `jekyll build`
   gulp.task('jekyll-build', done => {
-    return cp.spawn(jekyll, ['build'], { stdio: 'inherit' }).on('close', done);
+    runJekyll(['build'], done);
   });
 
   // run `jekyll build` with _config_dev.yml
   gulp.task('jekyll-dev', done => {
-    return cp
-      .spawn(jekyll, ['build', '--config', '_config.yml,_config_dev.yml'], {
-        stdio: 'inherit',
-      })
-      .on('close', done);
+    runJekyll(['build', '--config', '_config.yml,_config_dev.yml'], done);
   });
 
   // Rebuild Jekyll then reload the page
@@ -37,12 +58,16 @@ module.exports = gulp => {
 
   gulp.task(
     'serve',
-    gulp.series('jekyll-dev', () => {
-      browserSync.init({
-        server: {
-          baseDir: '_site',
+    gulp.series('jekyll-dev', done => {
+      browserSync.init(
+        {
+          server: {
+            baseDir: '_site',
+          },
+          open: false,
         },
-      });
+        done
+      );
 
       gulp.watch(scssPath, gulp.series(['sass', reloadBrowser]));
       gulp.watch(jsPath, gulp.series(['scripts', reloadBrowser]));

@@ -1,26 +1,26 @@
 # Site settings
-name: Brittany Chiang
-title: Brittany Chiang | Front End Software Engineer
-description: Design-minded front-end software engineer focused on building beautiful interfaces and experiences
-url: https://bchiang7.github.io/
+name: Mario Chusán
+title: Mario Chusán | AI / Software Engineer
+description: AI / Software engineer focused on building beautiful interfaces and experiences
+url: 
 baseurl: ''
-email: brittany.chiang@gmail.com
-cover: https://bchiang7.github.io/img/og.png
-logo: https://bchiang7.github.io/img/emojis/technologist.png
-resume: https://bchiang7.github.io/resume.pdf
+email: mchusan24@gmail.com
+cover: 
+logo: 
+resume: 
 social:
   - title: email
-    url: mailto:brittany.chiang@gmail.com
+    url: mailto:mchusan24@gmail.com
   - title: twitter
-    url: https://twitter.com/bchiang7
+    url: https://x.com/mchusan24
   - title: instagram
-    url: https://instagram.com/bchiang7
+    url: https://www.instagram.com/technosys.lab/
   - title: codepen
-    url: http://codepen.io/bchiang7
+    url: 
   - title: github
-    url: https://github.com/bchiang7
+    url: https://github.com/mchusantecnosys
   - title: linkedin
-    url: https://www.linkedin.com/in/bchiang7
+    url: https://www.linkedin.com/in/mario-chusan-p
 
 # Build settings
 markdown: kramdown
@@ -40,6 +40,7 @@ keep_files:
   - '.git'
   - '.gitignore'
 
-plugins_dir:
+plugins:
   - jekyll-minifier
   - jekyll-sitemap
+
