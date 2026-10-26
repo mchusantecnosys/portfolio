@@ -2,12 +2,12 @@
 name: Mario Chusán
 title: Mario Chusán | AI / Software Engineer
 description: AI / Software engineer focused on building beautiful interfaces and experiences
-url: 
+url: https://mchusantecnosys.github.io
 baseurl: ''
 email: mchusan24@gmail.com
-cover: 
-logo: 
-resume: 
+cover: /img/og.png
+logo: /img/logo/logo1.png
+resume: /resume.pdf
 social:
   - title: email
     url: mailto:mchusan24@gmail.com

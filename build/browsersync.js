@@ -12,27 +12,38 @@ const templatePath = [
 ];
 
 function runJekyll(args, done) {
-  const proc = cp.spawn('bundle', ['exec', 'jekyll', ...args], {
+  let doneCalled = false;
+  const finish = () => {
+    if (!doneCalled) {
+      doneCalled = true;
+      done();
+    }
+  };
+
+  const command = ['bundle', 'exec', 'jekyll', ...args].join(' ');
+  const proc = cp.spawn(command, {
     stdio: 'inherit',
     shell: true,
   });
 
   proc.on('error', () => {
-    const fallback = cp.spawn('jekyll', args, { stdio: 'inherit', shell: true });
-    fallback.on('error', () => done());
-    fallback.on('close', () => done());
+    const fallbackCommand = ['jekyll', ...args].join(' ');
+    const fallback = cp.spawn(fallbackCommand, { stdio: 'inherit', shell: true });
+    fallback.on('error', () => finish());
+    fallback.on('close', () => finish());
   });
 
   proc.on('close', code => {
     if (code === 0) {
-      done();
+      finish();
     } else {
-      const fallback = cp.spawn('jekyll', args, {
+      const fallbackCommand = ['jekyll', ...args].join(' ');
+      const fallback = cp.spawn(fallbackCommand, {
         stdio: 'inherit',
         shell: true,
       });
-      fallback.on('error', () => done());
-      fallback.on('close', () => done());
+      fallback.on('error', () => finish());
+      fallback.on('close', () => finish());
     }
   });
 }
@@ -58,20 +69,24 @@ module.exports = gulp => {
 
   gulp.task(
     'serve',
-    gulp.series('jekyll-dev', done => {
-      browserSync.init(
-        {
-          server: {
-            baseDir: '_site',
+    gulp.series(
+      gulp.parallel('sass', 'scripts'),
+      'jekyll-dev',
+      done => {
+        browserSync.init(
+          {
+            server: {
+              baseDir: '_site',
+            },
+            open: false,
           },
-          open: false,
-        },
-        done
-      );
+          done
+        );
 
-      gulp.watch(scssPath, gulp.series(['sass', reloadBrowser]));
-      gulp.watch(jsPath, gulp.series(['scripts', reloadBrowser]));
-      gulp.watch(templatePath, gulp.task('jekyll-rebuild'));
-    })
+        gulp.watch(scssPath, gulp.series(['sass', reloadBrowser]));
+        gulp.watch(jsPath, gulp.series(['scripts', reloadBrowser]));
+        gulp.watch(templatePath, gulp.series(['jekyll-rebuild']));
+      }
+    )
   );
 };

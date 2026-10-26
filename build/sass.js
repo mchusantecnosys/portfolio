@@ -14,6 +14,7 @@ module.exports = gulp => {
         sass({
           includePaths: ['scss'],
           outputStyle: 'expanded',
+          silenceDeprecations: ['legacy-js-api', 'import'],
         }).on('error', sass.logError)
       )
       .pipe(
@@ -22,7 +23,7 @@ module.exports = gulp => {
           cascade: false,
         })
       )
-      .pipe(cleanCSS({ compatibility: 'ie8' }))
+      .pipe(cleanCSS())
       .pipe(gulp.dest(destPath))
       .pipe(gulp.dest('css'));
   });
